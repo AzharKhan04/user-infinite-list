@@ -1,25 +1,39 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import isAuthenticated from "./Services/auth.service";
+import { BrowserRouter, Routes, Route , Navigate } from "react-router-dom";
+import AuthService from "./Services/auth.service";
 import routes from "./routes";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const getAuth = () => {
-  return isAuthenticated();
+
+  const authService:AuthService = new AuthService();
+  return authService.isAuthenticated();
 };
 
-function App() {
+const ProtectedRoute: React.FunctionComponent<any> = ({ children }) => {
+
+    const  authenticated  = getAuth();
+    return authenticated === true
+      ? children
+      : <Navigate to="/login" replace />;
+}
+
+const App : React.FC<any> = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {getAuth() &&
+        {
           routes.privateRoutes.map((route: any) => {
-            return <Route path={route.path} element={route.component} />;
-          })}
+            return <Route key ={route.path} path={route.path} element={<ProtectedRoute>{route.component}</ProtectedRoute>
+        } />;
+          })
+        }
         {routes.publicRoutes.map((route: any) => {
-          return <Route path={route.path} element={route.component} />;
+          return <Route key ={route.path} path={route.path} element={route.component} />;
         })}
+
+
       </Routes>
     </BrowserRouter>
   );

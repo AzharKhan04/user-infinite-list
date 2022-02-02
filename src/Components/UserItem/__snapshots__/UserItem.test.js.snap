@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserItem Component UserItem component renders correctly 1`] = `
+<div
+  className="no-border card"
+>
+  <div
+    className="card-body no-padding"
+  >
+    <div
+      className="row"
+      style={
+        Object {
+          "alignItems": "center",
+        }
+      }
+    >
+      <div
+        className="col-2"
+        style={
+          Object {
+            "marginTop": "12px",
+          }
+        }
+      >
+        <div
+          className="defaultProfileSmall"
+          style={
+            Object {
+              "backgroundColor": undefined,
+            }
+          }
+        />
+      </div>
+      <div
+        className="col-7 text-truncate"
+      >
+        <div
+          style={
+            Object {
+              "color": "royalblue",
+              "paddingTop": "20px",
+            }
+          }
+        >
+          <h5
+            style={
+              Object {
+                "fontSize": "16px",
+              }
+            }
+          >
+            test user
+          </h5>
+        </div>
+        <div
+          style={
+            Object {
+              "color": "grey",
+              "fontSize": "12px",
+            }
+          }
+        >
+          <span>
+            testemail@test.com
+          </span>
+        </div>
+        <div
+          style={
+            Object {
+              "color": "grey",
+              "fontSize": "12px",
+            }
+          }
+        >
+          <span>
+            testaddress
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

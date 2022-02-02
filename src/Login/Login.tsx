@@ -4,30 +4,37 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import isAuthenticated from "../Services/auth.service";
+import AuthService from "../Services/auth.service";
+import { useNavigate } from "react-router-dom";
+import LoginService from "./Login.service";
 
-const Login = () => {
+const Login : React.FunctionComponent<any> = () => {
+
   let [username, setUsername] = useState("");
   let [password, setPassword] = useState("");
 
-  if (isAuthenticated()) {
-    window.location.href = "/home";
+  const navigate = useNavigate();
+
+  const authService : AuthService = new AuthService();
+
+  if(authService.isAuthenticated()) {
+    navigate("/home");
   }
 
-  const login = () => {
-    if (!username || !password) {
-      return;
-    }
+  const performLogin = async() => {
 
-    if (username === "foo" && password === "bar") {
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
-          token: "_token__",
-        })
-      );
-      window.location.href = "/home";
+    let loginService : LoginService = new LoginService();
+    try {
+      let user = await loginService.login(username,password)
+      if(user) {
+        navigate('/home');
+      }
+
+    } catch(err) {
+
     }
+    
+
   };
 
   return (
@@ -74,7 +81,7 @@ const Login = () => {
                 <Grid style={{ paddingTop: "12px" }} item xs={12}>
                   <Button
                     fullWidth
-                    onClick={login}
+                    onClick={performLogin}
                     disabled={!username || !password}
                     variant="contained"
                   >
@@ -90,4 +97,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default React.memo(Login);

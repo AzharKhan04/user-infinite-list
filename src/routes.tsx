@@ -1,10 +1,15 @@
-import Welcome from "./Welcome";
 import Login from './Login';
+import Dashboard from './Dashboard';
 
 const privateRoutes:any[] =  [
     {
         path:'/home',
-        component:<Welcome/>
+        component:<Dashboard/>
+
+    },
+    {
+        path:'/',
+        component:<Dashboard/>
 
     }
 ]
@@ -14,12 +19,8 @@ const publicRoutes: any[] = [
         path:'/login',
         component:<Login/>
 
-    },
-    {
-        path:'/',
-        component:<Login/>
-
     }
+    
 ]
 
 const routes = {

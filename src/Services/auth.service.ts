@@ -1,17 +1,31 @@
-const isAuthenticated = () => {
 
-    let authenticated = false
+class AuthService {
 
-    let user:any = localStorage.getItem('user');
-    if(user) {
-        user = JSON.parse(user);
-        authenticated = user && user.token;
+    authenticated : boolean = false
+
+    isAuthenticated() {
+
+        let user:any = localStorage.getItem('user');
+
+        if(user) {
+            try {
+                user = JSON.parse(user);
+                this.authenticated = user.token ? true:false; 
+            } catch(err) {
+            }
+        }
+
+        return this.authenticated;
+
     }
 
-    
-    return authenticated;
+    logout() {
+        
+        localStorage.removeItem("user");          
+    }
 
 }
 
 
-export default isAuthenticated ;
+
+export default AuthService ;
